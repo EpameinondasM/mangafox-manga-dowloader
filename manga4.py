@@ -7,7 +7,6 @@ import requests, os, bs4, threading,re,sys
 import windowsuser
 
 
-
 file_location = windowsuser.expand_user() + '\\' + "Desktop" + "\\" + "manga"
 
 print (file_location)
@@ -21,7 +20,7 @@ manga_url = 'http://mangafox.me/manga/{0}'.format(manga)
 
 
 
-print (manga_url)
+
 os.makedirs(file_location, exist_ok = True) #Creates a file to store the manga images at -> file_location
 
 
@@ -83,6 +82,7 @@ def save_image(manga_page):
 #Downloads manga by chapters that the user inputs
 def download_manga_chapter(manga_url,startChapter,endChapter):
 
+
 	#Downloads the manga page.
 	print('Downloading page %s...' % manga_url)
 	res = requests.get(manga_url)
@@ -93,7 +93,7 @@ def download_manga_chapter(manga_url,startChapter,endChapter):
 	
 	#Finds the URL of the manga chapter
 	while startChapter <= endChapter: #loop starts at the value of the first manga chapter provided by the user and runs untill the final manga chapter
-		if startChapter < 100 and startChapter >= 10:	#mangafox chapter naming works like this : http://mangafox.me/manga/manga_name/cXXX/Y.html XXX stands for the number of manga chapter with 001 being first chapter and Y stands for the number of manga page
+		if startChapter < 100 and startChapter >= 10:	#mangafox chapter naming works like this : http://mangafox.me/manga/manga_name/cXXX/Y.html XXX stands for the number of manga chapter with 001 being first chapter and Y stands for the number of chapter page
 			comicElem = manga_url + "/c0" + str(startChapter) + "/1.html" 
 		elif startChapter < 10:
 			comicElem = manga_url + "/c00" + str(startChapter) + "/1.html"
@@ -126,10 +126,9 @@ def download_manga(manga_url):
 	
 
 		
-		
 
 
 
-
+download_manga_chapter(manga_url,startChapter,endChapter)
 
 
